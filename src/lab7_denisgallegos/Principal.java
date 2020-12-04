@@ -8,15 +8,20 @@ import javax.swing.JOptionPane;
 
 public class Principal extends javax.swing.JFrame {
 
-    static ArrayList <Usuarios> usuarios = new ArrayList();
+    ArrayList <Usuarios> usuarios = new ArrayList();
     SuperUsuario ingeniero = new SuperUsuario();
     
     public Principal() {
         initComponents();
+        usuarios = cargaralsistema();
         this.setLocationRelativeTo(null);
     }
+
+    public ArrayList<Usuarios> getUsuarios() {
+        return usuarios;
+    }
     
-    public static ArrayList cargaralsistema(){
+    public ArrayList cargaralsistema(){
         ArchivoUsuarios ap = new ArchivoUsuarios("./DatosUsuarios.cbm");
         ap.cargarArchivo();
         ArrayList <Usuarios>lista = ap.getUsuarios();
@@ -27,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         int indice = -1; 
         for (int c = 0; c < usuarios.size();c++){
             Usuarios objeto = (Usuarios) usuarios.get(c);
+            System.out.println(objeto.toStringUsusarios()+objeto.getUsername()+objeto.getPassword());
             if (objeto.getUsername().equals(user) && objeto.getPassword().equals(pass)){
                 indice = c; 
             }
@@ -247,7 +253,7 @@ public class Principal extends javax.swing.JFrame {
             objeto.setNombre(nombre);
             objeto.setApellido(apellido);
             objeto.setUsername(usuario);
-            objeto.setUsername(usuario);
+            objeto.setPassword(password);
             usuarios.add(objeto);
             ArchivoUsuarios ap = new ArchivoUsuarios("./DatosUsuarios.cbm");
             ap.cargarArchivo();
@@ -266,7 +272,10 @@ public class Principal extends javax.swing.JFrame {
         String password = jTextField6.getText();
         int indice = buscarenelsistema(usuario, password);
         if (indice != -1){
-            
+            MenuUsuarios frame = new MenuUsuarios();
+            frame.setIndiceusuaario(indice);
+            frame.setVisible(true);
+            this.dispose();
         }else {
             JOptionPane.showMessageDialog(null, "Entradas incorrectas.", "Error.", 0);
         }
@@ -276,7 +285,6 @@ public class Principal extends javax.swing.JFrame {
     public static void main(String args[]) {
         
         try {
-            usuarios = cargaralsistema();
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
