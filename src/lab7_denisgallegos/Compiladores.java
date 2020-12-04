@@ -10,7 +10,6 @@ public class Compiladores implements Serializable{
     
     private String nombre; 
     private String nombrecreador;
-    private int lineasdecodigo; 
     private int lexico;
     private int sintactico;
     private int semantico;
@@ -23,11 +22,10 @@ public class Compiladores implements Serializable{
     public Compiladores() {
     }
 
-    public Compiladores(String nombre, String nombrecreador, int lineasdecodigo, 
-            int lexico, int sintactico, int semantico, int intermedio, int optimizador, int generador) {
+    public Compiladores(String nombre, String nombrecreador, int lexico, 
+            int sintactico, int semantico, int intermedio, int optimizador, int generador) {
         this.nombre = nombre;
         this.nombrecreador = nombrecreador;
-        this.lineasdecodigo = lineasdecodigo;
         this.lexico = lexico;
         this.sintactico = sintactico;
         this.semantico = semantico;
@@ -51,14 +49,6 @@ public class Compiladores implements Serializable{
 
     public void setNombrecreador(String nombrecreador) {
         this.nombrecreador = nombrecreador;
-    }
-
-    public int getLineasdecodigo() {
-        return lineasdecodigo;
-    }
-
-    public void setLineasdecodigo(int lineasdecodigo) {
-        this.lineasdecodigo = lineasdecodigo;
     }
 
     public int getLexico() {
