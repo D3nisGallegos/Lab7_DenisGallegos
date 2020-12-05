@@ -8,6 +8,7 @@ package lab7_denisgallegos;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -35,19 +36,25 @@ public class MenuUsuarios extends javax.swing.JFrame {
     public void cargaralsistema(){
         Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(indiceusuaario);
         Compiladores compi = objeto.getCompilador();
-        jTextField1.setText(compi.getNombre());
-        jSpinner1.setValue(compi.getLexico());
-        jSpinner2.setValue(compi.getSintactico());
-        jSpinner3.setValue(compi.getSemantico());
-        jSpinner4.setValue(compi.getIntermedio());
-        jSpinner5.setValue(compi.getOptimizador());
-        jSpinner6.setValue(compi.getGenerador());     
-        DefaultTableModel modeltabla = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel m = (DefaultTableModel) compi.getTablavariables().getModel();
-        modeltabla = m; 
-        jTable1.setModel(modeltabla);
-        DefaultListModel modelo = (DefaultListModel) jList1.getModel();
-        modelo.addElement(compi.toStringCompiladores());
+        try{
+            if (compi.getNombre().isEmpty() == false){
+                jTextField1.setText(compi.getNombre());
+                jSpinner1.setValue(compi.getLexico());
+                jSpinner2.setValue(compi.getSintactico());
+                jSpinner3.setValue(compi.getSemantico());
+                jSpinner4.setValue(compi.getIntermedio());
+                jSpinner5.setValue(compi.getOptimizador());
+                jSpinner6.setValue(compi.getGenerador());     
+                DefaultTableModel modeltabla = (DefaultTableModel) jTable1.getModel();
+                DefaultTableModel m = (DefaultTableModel) compi.getTablavariables().getModel();
+                modeltabla = m; 
+                jTable1.setModel(modeltabla);
+                DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+                modelo.addElement(compi.toStringCompiladores());
+            }
+        }catch (Exception e){
+            
+        }
     }
 
     
@@ -390,9 +397,10 @@ public class MenuUsuarios extends javax.swing.JFrame {
         int generador = Integer.parseInt(jSpinner6.getValue()+"");
         String n = menuprime.getUsuarios().get(indiceusuaario).getNombre();
         Compiladores compi = new Compiladores(nombre, n, lexico, sintactico, semantico, intermedio, optimizador, generador);
+        compi.setTablavariables(jTable1);
         menuprime.getUsuarios().get(indiceusuaario).setCompilador(compi);
-        DefaultListModel modelo = (DefaultListModel) jList1.getModel();
-        modelo.addElement(compi.toStringCompiladores());
+        DefaultListModel modelo2 = (DefaultListModel) jList1.getModel();
+        modelo2.addElement(compi.toStringCompiladores());
         ArchivoUsuarios ap = new ArchivoUsuarios("./DatosUsuarios.cbm");
         ap.cargarArchivo();
         ap.setUsuarios(menuprime.getUsuarios());
