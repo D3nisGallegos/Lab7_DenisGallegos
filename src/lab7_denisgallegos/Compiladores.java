@@ -117,7 +117,7 @@ public class Compiladores implements Serializable{
     
     //MA:
     public String toStringCompiladores(){
-        return "Nombre: "+nombre;
+        return "Nombre: "+nombre+", Creador: "+nombrecreador;
     }
     
     

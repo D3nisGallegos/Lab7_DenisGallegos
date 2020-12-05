@@ -32,7 +32,6 @@ public class Principal extends javax.swing.JFrame {
         int indice = -1; 
         for (int c = 0; c < usuarios.size();c++){
             Usuarios objeto = (Usuarios) usuarios.get(c);
-            System.out.println(objeto.toStringUsusarios()+objeto.getUsername()+objeto.getPassword());
             if (objeto.getUsername().equals(user) && objeto.getPassword().equals(pass)){
                 indice = c; 
             }
@@ -259,7 +258,7 @@ public class Principal extends javax.swing.JFrame {
             ap.cargarArchivo();
             ap.getUsuarios().add(objeto);
             ap.escribirArchivo();
-            JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.", "Guardado", 0);
+            JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.", "Guardado", 1);
             jTextField1.setText("");
             jTextField2.setText("");
             jTextField3.setText("");
