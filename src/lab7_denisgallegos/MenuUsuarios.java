@@ -34,7 +34,8 @@ public class MenuUsuarios extends javax.swing.JFrame {
     }
     
     public void cargaralsistema(){
-        Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(indiceusuaario);
+        indiceusuaario = menuprime.indiceuser;
+        Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(menuprime.indiceuser);
         Compiladores compi = objeto.getCompilador();
         try{
             if (compi.getNombre().isEmpty() == false){
@@ -395,10 +396,10 @@ public class MenuUsuarios extends javax.swing.JFrame {
         int intermedio = Integer.parseInt(jSpinner4.getValue()+"");
         int optimizador = Integer.parseInt(jSpinner5.getValue()+"");
         int generador = Integer.parseInt(jSpinner6.getValue()+"");
-        String n = menuprime.getUsuarios().get(indiceusuaario).getNombre();
+        String n = menuprime.getUsuarios().get(menuprime.indiceuser).getNombre();
         Compiladores compi = new Compiladores(nombre, n, lexico, sintactico, semantico, intermedio, optimizador, generador);
         compi.setTablavariables(jTable1);
-        menuprime.getUsuarios().get(indiceusuaario).setCompilador(compi);
+        menuprime.getUsuarios().get(menuprime.indiceuser).setCompilador(compi);
         DefaultListModel modelo2 = (DefaultListModel) jList1.getModel();
         modelo2.addElement(compi.toStringCompiladores());
         ArchivoUsuarios ap = new ArchivoUsuarios("./DatosUsuarios.cbm");
@@ -415,7 +416,7 @@ public class MenuUsuarios extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (jList1.getSelectedIndex() >= 0){
-            Usuarios objeto = menuprime.usuarios.get(indiceusuaario); 
+            Usuarios objeto = menuprime.usuarios.get(menuprime.indiceuser); 
             Compiladores compi = new Compiladores();
             objeto.setCompilador(compi);
             DefaultListModel modelo = (DefaultListModel) jList1.getModel();

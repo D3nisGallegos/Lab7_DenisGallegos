@@ -42,6 +42,7 @@ public class MenuInge extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,8 +88,25 @@ public class MenuInge extends javax.swing.JFrame {
         });
 
         jButton2.setText("Eliminar compi");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Simulacion");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -109,6 +127,10 @@ public class MenuInge extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(37, 37, 37))
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +155,9 @@ public class MenuInge extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,16 +179,59 @@ public class MenuInge extends javax.swing.JFrame {
             for (int c = 0; c < menuprime.getUsuarios().size();c++){
                 Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(c);
                 if (objeto.toStringUsusarios().equals(jList1.getSelectedValue())){
-                    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
                     DefaultTableModel m = (DefaultTableModel) objeto.getCompilador().getTablavariables().getModel();
-                    modelo = m; 
-                    jTable1.setModel(modelo);
+                    if (m.getRowCount() == 0){
+                        jTable1.removeAll();
+                    }else {
+                        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+                        modelo = m; 
+                        jTable1.setModel(modelo);
+                    }
                 }
             }
         }else {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jList1.getSelectedIndex() >= 0){
+            for (int c = 0; c < menuprime.getUsuarios().size();c++){
+                Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(c);
+                if (objeto.toStringUsusarios().equals(jList1.getSelectedValue())){
+                    Compiladores compi = new Compiladores();
+                    objeto.setCompilador(compi);
+                    jTable1.removeAll();
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Compilador eliminado correctamente.");
+        }else {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario.");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        menuprime.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(jList1.getSelectedIndex() >= 0){
+            for (int c = 0; c < menuprime.getUsuarios().size();c++){
+                Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(c);
+                if (objeto.toStringUsusarios().equals(jList1.getSelectedValue())){
+                    Compiladores compi = (Compiladores) objeto.getCompilador();
+                    if (compi.getLexico() >= 300 && compi.getSintactico() >= 300 && compi.getSemantico() >= 800 && 
+                            compi.getIntermedio() >= 1200 && compi.getOptimizador() >= 1200 && compi.getGenerador() >= 500){
+                        JOptionPane.showMessageDialog(null, "Simulacion exitosa.");
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Compilador eliminado correctamente.");
+        }else {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario.");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     public static void main(String args[]) {
@@ -203,6 +270,7 @@ public class MenuInge extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

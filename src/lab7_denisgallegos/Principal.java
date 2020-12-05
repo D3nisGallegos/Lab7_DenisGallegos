@@ -10,6 +10,7 @@ public class Principal extends javax.swing.JFrame {
 
     ArrayList <Usuarios> usuarios = new ArrayList();
     SuperUsuario ingeniero = new SuperUsuario();
+    int indiceuser; 
     
     public Principal() {
         initComponents();
@@ -362,9 +363,11 @@ public class Principal extends javax.swing.JFrame {
         String usuario = jTextField5.getText();
         String password = jTextField6.getText();
         int indice = buscarenelsistema(usuario, password);
+        indiceuser = indice; 
         if (indice != -1){
             MenuUsuarios frame = new MenuUsuarios();
             frame.setIndiceusuaario(indice);
+            frame.cargaralsistema();
             frame.setVisible(true);
             this.dispose();
         }else {
