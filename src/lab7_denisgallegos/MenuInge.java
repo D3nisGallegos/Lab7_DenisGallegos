@@ -101,7 +101,7 @@ public class MenuInge extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Regresar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -221,13 +221,53 @@ public class MenuInge extends javax.swing.JFrame {
                 Usuarios objeto = (Usuarios) menuprime.getUsuarios().get(c);
                 if (objeto.toStringUsusarios().equals(jList1.getSelectedValue())){
                     Compiladores compi = (Compiladores) objeto.getCompilador();
-                    if (compi.getLexico() >= 300 && compi.getSintactico() >= 300 && compi.getSemantico() >= 800 && 
-                            compi.getIntermedio() >= 1200 && compi.getOptimizador() >= 1200 && compi.getGenerador() >= 500){
-                        JOptionPane.showMessageDialog(null, "Simulacion exitosa.");
+                    String code = "";
+                    int nota = 90; 
+                    if (compi.getLexico() >= 300){
+                        
+                    }else {
+                        code = "e1";
+                        nota = nota - 15;
                     }
+                    if (compi.getSintactico() >= 300){
+                           
+                    }else {
+                        code = "e2";
+                        nota = nota - 15;
+                    }
+                    if (compi.getSemantico() >= 500){
+                    }else {
+                        code = "e3";
+                        nota = nota - 20;
+                    }
+                    if (compi.getIntermedio() >= 1200){
+                                    
+                    }else {
+                        code = "e4";
+                        nota = nota -10;
+                    }
+                    if (compi.getOptimizador() >= 1200){
+                                        
+                    }else {
+                        code = "e5";
+                        nota = nota - 5;
+                    }
+                    if (compi.getGenerador() >= 500){
+                                            
+                    }else{
+                        code = "e5";
+                        nota = nota - 25;
+                    }
+                    if (nota == 90){
+                        JOptionPane.showMessageDialog(null, "Simulacion exitosa. Nota: "+nota, "Exito:", 1);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Optimizacion con errores. Su nota es:"+nota, "Exito:", 1);
+                    }
+                    objeto.setNota(nota);
+                    
+                        
                 }
             }
-            JOptionPane.showMessageDialog(null, "Compilador eliminado correctamente.");
         }else {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario.");
         }

@@ -363,11 +363,12 @@ public class Principal extends javax.swing.JFrame {
         String usuario = jTextField5.getText();
         String password = jTextField6.getText();
         int indice = buscarenelsistema(usuario, password);
+        System.out.println(indice);
         indiceuser = indice; 
         if (indice != -1){
             MenuUsuarios frame = new MenuUsuarios();
+            frame.cargaralsistema(indice);
             frame.setIndiceusuaario(indice);
-            frame.cargaralsistema();
             frame.setVisible(true);
             this.dispose();
         }else {
